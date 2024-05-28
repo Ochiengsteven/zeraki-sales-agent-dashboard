@@ -5,12 +5,11 @@ import Dashboard from "../pages/Dashboard/Dashboard";
 const MainLayout = () => {
   return (
     <>
-      <div className="bg-green-300 flex w-screen h-screen">
+      <div className="bg-dashboard-bg flex w-screen h-screen">
         <div>
           <Sidebar />
         </div>
         <div>
-          <div>MainLayout</div>
           <Dashboard />
         </div>
       </div>

@@ -1,14 +1,15 @@
 import React from "react";
 import {
   Navbar,
-  NavbarBrand,
+  // NavbarBrand,
   NavbarMenuToggle,
   NavbarMenuItem,
   NavbarMenu,
   NavbarContent,
-  NavbarItem,
+  // NavbarItem,
   Link,
 } from "@nextui-org/react";
+import Desktopnav from "./Desktopnav";
 
 const Sidebar = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -17,30 +18,24 @@ const Sidebar = () => {
     { name: "Schools", link: "/schools" },
   ];
   return (
-    <header className="bg-white text-stone-800">
+    <header className="bg-transparent text-stone-800">
       <Navbar
         isBordered
         isMenuOpen={isMenuOpen}
         onMenuOpenChange={setIsMenuOpen}
-        className="bg-white text-stone-800"
+        className="bg-transparent text-stone-800"
       >
-        <NavbarContent className="sm:hidden" justify="start">
+        <NavbarContent
+          className="sm:hidden bg-transparent border-none"
+          justify="start"
+        >
           <NavbarMenuToggle
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           />
         </NavbarContent>
 
-        <div className="hidden sm:flex">
-          <NavbarContent className="hidden sm:flex items-start flex-col">
-            <NavbarBrand>
-              <Link href="/">School Management</Link>
-            </NavbarBrand>
-            {menuItems.map((item, index) => (
-              <NavbarItem key={index}>
-                <Link href={item.link}>{item.name}</Link>
-              </NavbarItem>
-            ))}
-          </NavbarContent>
+        <div className="hidden sm:flex w-full sm:h-screen">
+          <Desktopnav />
         </div>
 
         <NavbarMenu>
