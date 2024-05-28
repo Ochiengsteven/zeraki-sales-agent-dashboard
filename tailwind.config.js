@@ -13,6 +13,7 @@ export default {
     extend: {
       colors: {
         "dashboard-bg": "#d8f3dc",
+        "card-bg": "#80ed99",
       },
     },
   },

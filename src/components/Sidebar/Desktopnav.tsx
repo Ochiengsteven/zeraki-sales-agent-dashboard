@@ -11,15 +11,20 @@ const Desktopnav = () => {
       <Sidenav className="h-screen absolute left-0 top-0">
         <Sidenav.Body>
           <Nav>
-            <h1 className="text-3xl px-6 text-center">ZERAKI</h1>
-            <hr />
+            <h1 className="text-3xl px-6 text-left py-2 pl-14 mb-4">ZERAKI</h1>
             <Nav.Item eventKey="1">
-              <FontAwesomeIcon icon={faSquarePollVertical} className="mr-2" />
-              Dashboard
+              <FontAwesomeIcon
+                icon={faSquarePollVertical}
+                className="mr-2 text-xl"
+              />
+              <span className="text-xl font-semibold">Dashboard</span>
             </Nav.Item>
             <Nav.Item eventKey="2">
-              <FontAwesomeIcon icon={faChalkboardUser} className="mr-2" />
-              Schools
+              <FontAwesomeIcon
+                icon={faChalkboardUser}
+                className="mr-2 text-xl"
+              />
+              <span className="text-xl font-semibold">Schools</span>
             </Nav.Item>
           </Nav>
         </Sidenav.Body>
