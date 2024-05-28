@@ -1,0 +1,128 @@
+{
+  "collections": [
+    {
+      "id": 1,
+      "schoolId": 1,
+      "amount": 500,
+      "date": "2024-05-01",
+      "status": "Valid"
+    },
+    {
+      "id": 2,
+      "schoolId": 2,
+      "amount": 300,
+      "date": "2024-05-02",
+      "status": "Valid"
+    }
+  ],
+  "signups": [
+    {
+      "id": 1,
+      "schoolId": 1,
+      "product": "Zeraki Analytics",
+      "date": "2024-04-15"
+    },
+    {
+      "id": 2,
+      "schoolId": 2,
+      "product": "Zeraki Finance",
+      "date": "2024-04-16"
+    },
+    {
+      "id": 3,
+      "schoolId": 3,
+      "product": "Zeraki Timetable",
+      "date": "2024-04-17"
+    }
+  ],
+  "revenue": [
+    { "id": 1, "product": "Zeraki Analytics", "amount": 2000 },
+    { "id": 2, "product": "Zeraki Finance", "amount": 1500 },
+    { "id": 3, "product": "Zeraki Timetable", "amount": 1000 }
+  ],
+  "bouncedCheques": [
+    { "id": 1, "schoolId": 3, "amount": 400, "date": "2024-05-10" }
+  ],
+  "schools": [
+    {
+      "id": 1,
+      "name": "Primary School A",
+      "type": "Primary",
+      "county": "County A",
+      "registrationDate": "2024-01-01",
+      "contact": "123456789",
+      "products": ["Zeraki Analytics"],
+      "balance": 1000
+    },
+    {
+      "id": 2,
+      "name": "Secondary School B",
+      "type": "Secondary",
+      "county": "County B",
+      "registrationDate": "2024-01-02",
+      "contact": "987654321",
+      "products": ["Zeraki Finance", "Zeraki Analytics"],
+      "balance": 500
+    },
+    {
+      "id": 3,
+      "name": "Primary School C",
+      "type": "Primary",
+      "county": "County C",
+      "registrationDate": "2024-01-03",
+      "contact": "123456789",
+      "products": ["Zeraki Timetable"],
+      "balance": 0
+    }
+  ],
+  "invoices": [
+    {
+      "id": 1,
+      "schoolId": 1,
+      "item": "Zeraki Analytics",
+      "amount": 500,
+      "dueDate": "2024-05-30",
+      "paidAmount": 0,
+      "status": "Pending",
+      "daysUntilDue": 3
+    },
+    {
+      "id": 2,
+      "schoolId": 2,
+      "item": "Zeraki Finance",
+      "amount": 300,
+      "dueDate": "2024-06-15",
+      "paidAmount": 100,
+      "status": "Pending",
+      "daysUntilDue": 15
+    },
+    {
+      "id": 3,
+      "schoolId": 3,
+      "item": "Zeraki Timetable",
+      "amount": 400,
+      "dueDate": "2024-06-15",
+      "paidAmount": 0,
+      "status": "Pending",
+      "daysUntilDue": 2
+    }
+  ],
+  "collectionsPerSchool": [
+    {
+      "id": 1,
+      "schoolId": 1,
+      "invoiceId": 1,
+      "collectionId": 1,
+      "status": "Valid",
+      "amount": 500
+    },
+    {
+      "id": 2,
+      "schoolId": 2,
+      "invoiceId": 2,
+      "collectionId": 2,
+      "status": "Bounced",
+      "amount": 300
+    }
+  ]
+}
