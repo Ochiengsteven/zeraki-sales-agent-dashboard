@@ -53,11 +53,11 @@ export const fetchCollectionsPerSchool = createAsyncThunk(
   }
 );
 
-// types for the state
+// Define types for the state
 interface ApiState {
   collections: any[];
-  signups: any[];
-  revenue: any[];
+  signups: Signup[];
+  revenue: Revenue[];
   bouncedCheques: any[];
   schools: any[];
   invoices: any[];
@@ -103,7 +103,7 @@ const apiSlice = createSlice({
       })
       .addCase(
         fetchSignups.fulfilled,
-        (state, action: PayloadAction<any[]>) => {
+        (state, action: PayloadAction<Signup[]>) => {
           state.loading = "idle";
           state.signups = action.payload;
         }
@@ -117,7 +117,7 @@ const apiSlice = createSlice({
       })
       .addCase(
         fetchRevenue.fulfilled,
-        (state, action: PayloadAction<any[]>) => {
+        (state, action: PayloadAction<Revenue[]>) => {
           state.loading = "idle";
           state.revenue = action.payload;
         }
@@ -186,7 +186,7 @@ const apiSlice = createSlice({
   },
 });
 
-// selector to calculate total collections amount
+// Selector to calculate total collections amount
 export const selectTotalCollections = (state: { api: ApiState }) => {
   return state.api.collections.reduce(
     (total, collection) => total + collection.amount,
@@ -194,11 +194,42 @@ export const selectTotalCollections = (state: { api: ApiState }) => {
   );
 };
 
-// selector to get the total number of signups
+// Selector to get the total number of signups
 export const selectTotalSignups = (state: { api: ApiState }) =>
   state.api.signups.length;
 
-// selector to get the total revenue amount
+// Define types for breakdowns
+interface SignupBreakdown {
+  "Zeraki Analytics": number;
+  "Zeraki Finance": number;
+  "Zeraki Timetable": number;
+}
+
+type SignupProduct = keyof SignupBreakdown;
+
+interface Signup {
+  product: SignupProduct;
+}
+
+export const selectSignupsByProduct = (state: {
+  api: { signups: Signup[] };
+}): SignupBreakdown => {
+  const breakdown: SignupBreakdown = {
+    "Zeraki Analytics": 0,
+    "Zeraki Finance": 0,
+    "Zeraki Timetable": 0,
+  };
+
+  state.api.signups.forEach((signup) => {
+    if (signup.product in breakdown) {
+      breakdown[signup.product]++;
+    }
+  });
+
+  return breakdown;
+};
+
+// Selector to get the total revenue amount
 export const selectTotalRevenue = (state: { api: ApiState }) => {
   return state.api.revenue.reduce(
     (total, revenue) => total + revenue.amount,
@@ -206,7 +237,39 @@ export const selectTotalRevenue = (state: { api: ApiState }) => {
   );
 };
 
-// selector to get the total number of bounced cheques
+// Define types for revenue breakdown
+interface RevenueBreakdown {
+  "Zeraki Analytics": number;
+  "Zeraki Finance": number;
+  "Zeraki Timetable": number;
+}
+
+type RevenueProduct = keyof RevenueBreakdown;
+
+interface Revenue {
+  product: RevenueProduct;
+  amount: number;
+}
+
+export const selectRevenueByProduct = (state: {
+  api: { revenue: Revenue[] };
+}): RevenueBreakdown => {
+  const breakdown: RevenueBreakdown = {
+    "Zeraki Analytics": 0,
+    "Zeraki Finance": 0,
+    "Zeraki Timetable": 0,
+  };
+
+  state.api.revenue.forEach((revenue) => {
+    if (revenue.product in breakdown) {
+      breakdown[revenue.product] += revenue.amount;
+    }
+  });
+
+  return breakdown;
+};
+
+// Selector to get the total number of bounced cheques
 export const selectTotalBouncedCheques = (state: { api: ApiState }) =>
   state.api.bouncedCheques.length;
 

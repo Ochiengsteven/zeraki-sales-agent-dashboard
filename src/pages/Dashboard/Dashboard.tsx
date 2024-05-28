@@ -1,4 +1,3 @@
-// Dashboard.tsx
 import { useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
 import {
@@ -10,6 +9,8 @@ import {
   selectTotalSignups,
   selectTotalRevenue,
   selectTotalBouncedCheques,
+  selectSignupsByProduct,
+  selectRevenueByProduct,
 } from "../../redux/api/apiSlice";
 import { Card, CardHeader, CardBody } from "@nextui-org/react";
 
@@ -19,6 +20,8 @@ const Dashboard = () => {
   const totalSignups = useAppSelector(selectTotalSignups);
   const totalRevenue = useAppSelector(selectTotalRevenue);
   const totalBouncedCheques = useAppSelector(selectTotalBouncedCheques);
+  const signupsByProduct = useAppSelector(selectSignupsByProduct);
+  const revenueByProduct = useAppSelector(selectRevenueByProduct);
   const loading = useAppSelector((state) => state.api.loading);
   const error = useAppSelector((state) => state.api.error);
 
@@ -43,34 +46,48 @@ const Dashboard = () => {
         <Card className="py-4 bg-card-bg">
           <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
             <h4 className="font-bold text-large">Collections</h4>
-            <small className="text-default-500  text-lg">
+            <small className="text-default-500 text-lg">
               Total: {totalCollection}
             </small>
           </CardHeader>
           <CardBody className="overflow-visible py-2"></CardBody>
         </Card>
         <Card className="py-4 bg-card-bg">
-          <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-            <h4 className="font-bold text-large">Sign-ups</h4>
-            <small className="text-default-500 text-lg">
-              Total: {totalSignups}
-            </small>
+          <CardHeader className="pb-0 pt-2 px-4 flex gap-4 items-start">
+            <div>
+              <h4 className="font-bold text-large">Sign-ups</h4>
+              <small className="text-default-500 text-lg">
+                Total: {totalSignups}
+              </small>
+            </div>
+            <div className="text-default-500 text-sm pl-4 border-l-2 border-dashboard-bg">
+              <p>Zeraki Analytics: {signupsByProduct["Zeraki Analytics"]}</p>
+              <p>Zeraki Finance: {signupsByProduct["Zeraki Finance"]}</p>
+              <p>Zeraki Timetable: {signupsByProduct["Zeraki Timetable"]}</p>
+            </div>
           </CardHeader>
           <CardBody className="overflow-visible py-2"></CardBody>
         </Card>
         <Card className="py-4 bg-card-bg">
-          <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-            <h4 className="font-bold text-large">Revenue</h4>
-            <small className="text-default-500  text-lg">
-              Total: {totalRevenue}
-            </small>
+          <CardHeader className="pb-0 pt-2 px-4 flex gap-4 items-start">
+            <div>
+              <h4 className="font-bold text-large">Revenue</h4>
+              <small className="text-default-500 text-lg">
+                Total: {totalRevenue}
+              </small>
+            </div>
+            <div className="text-default-500 text-sm pl-4 border-l-2 border-dashboard-bg">
+              <p>Zeraki Analytics: {revenueByProduct["Zeraki Analytics"]}</p>
+              <p>Zeraki Finance: {revenueByProduct["Zeraki Finance"]}</p>
+              <p>Zeraki Timetable: {revenueByProduct["Zeraki Timetable"]}</p>
+            </div>
           </CardHeader>
           <CardBody className="overflow-visible py-2"></CardBody>
         </Card>
         <Card className="py-4 bg-card-bg">
           <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
             <h4 className="font-bold text-large">Bounced Cheques</h4>
-            <small className="text-default-500  text-lg">
+            <small className="text-default-500 text-lg">
               Total: {totalBouncedCheques}
             </small>
           </CardHeader>

@@ -23,16 +23,28 @@
       "date": "2024-04-15"
     },
     {
-      "id": 2,
-      "schoolId": 2,
-      "product": "Zeraki Finance",
-      "date": "2024-04-16"
-    },
-    {
       "id": 3,
       "schoolId": 3,
       "product": "Zeraki Timetable",
       "date": "2024-04-17"
+    },
+    {
+      "id": 4,
+      "schoolId": 4,
+      "product": "Zeraki Analytics",
+      "date": "2024-05-01"
+    },
+    {
+      "id": 5,
+      "schoolId": 5,
+      "product": "Zeraki Finance",
+      "date": "2024-05-02"
+    },
+    {
+      "id": 6,
+      "schoolId": 6,
+      "product": "Zeraki Timetable",
+      "date": "2024-05-03"
     }
   ],
   "revenue": [
@@ -124,5 +136,10 @@
       "status": "Bounced",
       "amount": 300
     }
-  ]
+  ],
+  "targets": {
+    "Zeraki Analytics": 10,
+    "Zeraki Finance": 15,
+    "Zeraki Timetable": 12
+  }
 }
