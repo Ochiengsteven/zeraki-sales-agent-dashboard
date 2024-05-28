@@ -52,15 +52,15 @@ const Dashboard = () => {
           </CardHeader>
           <CardBody className="overflow-visible py-2"></CardBody>
         </Card>
-        <Card className="py-4 bg-card-bg">
-          <CardHeader className="pb-0 pt-2 px-4 flex gap-4 items-start">
+        <Card className="py-4 bg-card-bg h-full">
+          <CardHeader className="pb-0 pt-2 px-4 flex gap-4 items-start justify-center h-full">
             <div>
               <h4 className="font-bold text-large">Sign-ups</h4>
               <small className="text-default-500 text-lg">
                 Total: {totalSignups}
               </small>
             </div>
-            <div className="text-default-500 text-sm pl-4 border-l-2 border-dashboard-bg">
+            <div className="text-default-500 text-sm pl-4 border-l-2 border-dashboard-bg h-full">
               <p>Zeraki Analytics: {signupsByProduct["Zeraki Analytics"]}</p>
               <p>Zeraki Finance: {signupsByProduct["Zeraki Finance"]}</p>
               <p>Zeraki Timetable: {signupsByProduct["Zeraki Timetable"]}</p>
@@ -68,15 +68,15 @@ const Dashboard = () => {
           </CardHeader>
           <CardBody className="overflow-visible py-2"></CardBody>
         </Card>
-        <Card className="py-4 bg-card-bg">
-          <CardHeader className="pb-0 pt-2 px-4 flex gap-4 items-start">
+        <Card className="py-4 bg-card-bg h-full">
+          <CardHeader className="pb-0 pt-2 px-4 flex gap-4 items-start justify-center h-full">
             <div>
               <h4 className="font-bold text-large">Revenue</h4>
               <small className="text-default-500 text-lg">
                 Total: {totalRevenue}
               </small>
             </div>
-            <div className="text-default-500 text-sm pl-4 border-l-2 border-dashboard-bg">
+            <div className="text-default-500 text-sm pl-4 border-l-2 border-dashboard-bg h-full">
               <p>Zeraki Analytics: {revenueByProduct["Zeraki Analytics"]}</p>
               <p>Zeraki Finance: {revenueByProduct["Zeraki Finance"]}</p>
               <p>Zeraki Timetable: {revenueByProduct["Zeraki Timetable"]}</p>
