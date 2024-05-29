@@ -8,6 +8,7 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import App from "./App.tsx";
 import "./index.css";
 import "rsuite/dist/rsuite.min.css";
+import { BrowserRouter as Router } from "react-router-dom";
 
 config.autoAddCss = false;
 
@@ -15,7 +16,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Provider store={store}>
       <CustomProvider>
-        <App />
+        <Router>
+          <App />
+        </Router>
       </CustomProvider>
     </Provider>
   </React.StrictMode>
