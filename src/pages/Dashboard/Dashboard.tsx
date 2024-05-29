@@ -43,6 +43,9 @@ const Dashboard = () => {
     dispatch(fetchSchools());
   }, [dispatch]);
 
+  console.log("Schools data: ", schools);
+  console.log("Invoices data: ", invoices);
+
   if (loading === "loading") {
     return <div>Loading...</div>;
   }
@@ -55,7 +58,7 @@ const Dashboard = () => {
     <div className="mt-4 px-4 py-2 w-full">
       <div className="grid grid-cols-1 lg:grid-cols-3 w-full">
         <div className="lg:col-span-2">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 w-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3 w-full">
             <Card className="py-4 bg-card-bg">
               <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
                 <h4 className="font-bold text-large">Collections</h4>

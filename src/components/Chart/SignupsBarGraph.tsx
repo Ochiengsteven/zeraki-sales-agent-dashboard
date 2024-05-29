@@ -37,7 +37,7 @@ const SignupsBarGraph = () => {
   ];
 
   return (
-    <div>
+    <div className="p-4">
       <h4 className="text-center text-gray-900">Signups Overview</h4>
       <ResponsiveContainer width="100%" height={300}>
         <BarChart
