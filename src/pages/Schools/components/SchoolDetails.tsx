@@ -1,6 +1,7 @@
+// SchoolDetails.tsx
 import React, { useState } from "react";
 import InvoiceTable from "./InvoiceList";
-import CollectionTable from "./CollectionList";
+import CollectionList from "./CollectionList";
 
 interface School {
   id: number;
@@ -27,8 +28,6 @@ interface Invoice {
 interface Collection {
   id: number;
   schoolId: number;
-  invoiceId: number;
-  collectionId: number;
   amount: number;
   date: string;
   status: string;
@@ -63,11 +62,32 @@ const SchoolDetails: React.FC<SchoolDetailsProps> = ({
   const handleSaveInvoice = () => {
     if (editingInvoice) {
       // Update existing invoice logic
+      fetch(`http://localhost:5000/invoices/${editingInvoice.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newInvoice),
+      })
+        .then((response) => response.json())
+        .then(() => {
+          setEditingInvoice(null);
+          setNewInvoice({});
+        });
     } else {
       // Create new invoice logic
+      fetch("http://localhost:5000/invoices", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ...newInvoice, schoolId: school.id }),
+      })
+        .then((response) => response.json())
+        .then(() => {
+          setNewInvoice({});
+        });
     }
-    setNewInvoice({});
-    setEditingInvoice(null);
   };
 
   const handleEditInvoice = (invoice: Invoice) => {
@@ -75,9 +95,24 @@ const SchoolDetails: React.FC<SchoolDetailsProps> = ({
     setNewInvoice(invoice);
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleDeleteInvoice = (_invoiceId: number) => {
-    // Delete invoice logic
+  const handleDeleteInvoice = (invoiceId: number) => {
+    fetch(`http://localhost:5000/invoices/${invoiceId}`, {
+      method: "DELETE",
+    }).then(() => {
+      // Handle state update to remove the deleted invoice
+    });
+  };
+
+  const handleUpdateCollectionStatus = (id: number, status: string) => {
+    fetch(`http://localhost:5000/collections/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ status }),
+    }).then(() => {
+      // Handle state update to reflect the new status
+    });
   };
 
   return (
@@ -161,7 +196,10 @@ const SchoolDetails: React.FC<SchoolDetailsProps> = ({
       </div>
 
       <h3 className="text-lg font-semibold text-gray-800 mt-4">Collections</h3>
-      <CollectionTable collections={collections} />
+      <CollectionList
+        collections={collections}
+        onUpdateStatus={handleUpdateCollectionStatus}
+      />
     </div>
   );
 };
