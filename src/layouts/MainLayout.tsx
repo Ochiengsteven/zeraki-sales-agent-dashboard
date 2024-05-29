@@ -5,7 +5,7 @@ import Dashboard from "../pages/Dashboard/Dashboard";
 const MainLayout = () => {
   return (
     <>
-      <div className="flex w-screen h-screen bg-[#F7F7FA]">
+      <div className="flex w-screen min-h-screen bg-[#F7F7FA]">
         <div>
           <Sidebar />
         </div>

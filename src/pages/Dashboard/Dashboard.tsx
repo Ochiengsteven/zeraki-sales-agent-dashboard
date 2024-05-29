@@ -13,6 +13,7 @@ import {
   selectRevenueByProduct,
 } from "../../redux/api/apiSlice";
 import { Card, CardHeader, CardBody } from "@nextui-org/react";
+import Targets from "../../components/Chart/Targets";
 
 const Dashboard = () => {
   const dispatch = useAppDispatch();
@@ -93,6 +94,10 @@ const Dashboard = () => {
           </CardHeader>
           <CardBody className="overflow-visible py-2"></CardBody>
         </Card>
+      </div>
+
+      <div>
+        <Targets signup={signupsByProduct} />
       </div>
     </div>
   );
