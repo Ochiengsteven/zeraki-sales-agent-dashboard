@@ -7,7 +7,7 @@ import {
 } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "https://server-pl68.onrender.com";
 
 export const fetchCollections = createAsyncThunk(
   "api/fetchCollections",
