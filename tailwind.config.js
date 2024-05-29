@@ -10,7 +10,12 @@ export default {
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        "dashboard-bg": "#d8f3dc",
+        "card-bg": "#80ed99",
+      },
+    },
   },
   darkMode: "class",
   plugins: [nextui()],
