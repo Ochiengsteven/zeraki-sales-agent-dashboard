@@ -38,8 +38,8 @@ const SignupsBarGraph = () => {
 
   return (
     <div>
-      <h4>Signups Overview</h4>
-      <ResponsiveContainer width="100%" height={400}>
+      <h4 className="text-center text-gray-900">Signups Overview</h4>
+      <ResponsiveContainer width="100%" height={300}>
         <BarChart
           data={data}
           margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
