@@ -11,43 +11,60 @@ interface Invoice {
   daysUntilDue: number;
 }
 
-interface InvoiceListProps {
+interface InvoiceTableProps {
   invoices: Invoice[];
+  onEdit: (invoice: Invoice) => void;
+  onDelete: (invoiceId: number) => void;
 }
 
-const InvoiceList: React.FC<InvoiceListProps> = ({ invoices }) => {
+const InvoiceTable: React.FC<InvoiceTableProps> = ({
+  invoices,
+  onEdit,
+  onDelete,
+}) => {
   return (
-    <div className="bg-gray-50 p-4 rounded-lg shadow-sm mt-2">
-      <h3 className="text-lg font-medium mb-2">Invoice List</h3>
-      <ul className="space-y-2">
-        {invoices.map((invoice) => (
-          <li key={invoice.id} className="p-2 rounded-lg bg-white shadow-sm">
-            <p>
-              <strong>Invoice Number:</strong> {invoice.id}
-            </p>
-            <p>
-              <strong>Item:</strong> {invoice.item}
-            </p>
-            <p>
-              <strong>Amount:</strong> {invoice.amount}
-            </p>
-            <p>
-              <strong>Due Date:</strong> {invoice.dueDate}
-            </p>
-            <p>
-              <strong>Paid Amount:</strong> {invoice.paidAmount}
-            </p>
-            <p>
-              <strong>Status:</strong> {invoice.status}
-            </p>
-            <p>
-              <strong>Days Until Due:</strong> {invoice.daysUntilDue}
-            </p>
-          </li>
-        ))}
-      </ul>
+    <div className="overflow-x-auto">
+      <table className="min-w-full bg-white rounded-lg shadow-md overflow-x-auto">
+        <thead>
+          <tr>
+            <th className="py-2 px-4 border-b">Invoice Number</th>
+            <th className="py-2 px-4 border-b">Item</th>
+            <th className="py-2 px-4 border-b">Amount</th>
+            <th className="py-2 px-4 border-b">Due Date</th>
+            <th className="py-2 px-4 border-b">Paid Amount</th>
+            <th className="py-2 px-4 border-b">Status</th>
+            <th className="py-2 px-4 border-b">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {invoices.map((invoice) => (
+            <tr key={invoice.id}>
+              <td className="py-2 px-4 border-b">{invoice.id}</td>
+              <td className="py-2 px-4 border-b">{invoice.item}</td>
+              <td className="py-2 px-4 border-b">{invoice.amount}</td>
+              <td className="py-2 px-4 border-b">{invoice.dueDate}</td>
+              <td className="py-2 px-4 border-b">{invoice.paidAmount}</td>
+              <td className="py-2 px-4 border-b">{invoice.status}</td>
+              <td className="py-2 px-4 border-b flex gap-2">
+                <button
+                  onClick={() => onEdit(invoice)}
+                  className="bg-yellow-500 text-white rounded-lg my-2 px-4 py-2 mr-2"
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={() => onDelete(invoice.id)}
+                  className="bg-red-400 text-white rounded-md my-2 px-4 py-2"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
 
-export default InvoiceList;
+export default InvoiceTable;
