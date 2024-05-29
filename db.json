@@ -93,7 +93,7 @@
     {
       "id": 3,
       "name": "Primary School C",
-      "type": "Primary",
+      "type": "IGCSE",
       "county": "County C",
       "registrationDate": "2024-01-03",
       "contact": "123456789",

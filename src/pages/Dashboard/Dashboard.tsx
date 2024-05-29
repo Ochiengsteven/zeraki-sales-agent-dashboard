@@ -14,6 +14,7 @@ import {
 } from "../../redux/api/apiSlice";
 import { Card, CardHeader, CardBody } from "@nextui-org/react";
 import Targets from "../../components/Chart/Targets";
+import SignupsBarGraph from "../../components/Chart/SignupsBarGraph";
 
 const Dashboard = () => {
   const dispatch = useAppDispatch();
@@ -43,61 +44,76 @@ const Dashboard = () => {
 
   return (
     <div className="mt-4 px-4 py-2 w-full">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 w-full">
-        <Card className="py-4 bg-card-bg">
-          <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-            <h4 className="font-bold text-large">Collections</h4>
-            <small className="text-default-500 text-lg">
-              Total: {totalCollection}
-            </small>
-          </CardHeader>
-          <CardBody className="overflow-visible py-2"></CardBody>
-        </Card>
-        <Card className="py-4 bg-card-bg h-full">
-          <CardHeader className="pb-0 pt-2 px-4 flex gap-4 items-start justify-center h-full">
-            <div>
-              <h4 className="font-bold text-large">Sign-ups</h4>
-              <small className="text-default-500 text-lg">
-                Total: {totalSignups}
-              </small>
-            </div>
-            <div className="text-default-500 text-sm pl-4 border-l-2 border-dashboard-bg h-full">
-              <p>Zeraki Analytics: {signupsByProduct["Zeraki Analytics"]}</p>
-              <p>Zeraki Finance: {signupsByProduct["Zeraki Finance"]}</p>
-              <p>Zeraki Timetable: {signupsByProduct["Zeraki Timetable"]}</p>
-            </div>
-          </CardHeader>
-          <CardBody className="overflow-visible py-2"></CardBody>
-        </Card>
-        <Card className="py-4 bg-card-bg h-full">
-          <CardHeader className="pb-0 pt-2 px-4 flex gap-4 items-start justify-center h-full">
-            <div>
-              <h4 className="font-bold text-large">Revenue</h4>
-              <small className="text-default-500 text-lg">
-                Total: {totalRevenue}
-              </small>
-            </div>
-            <div className="text-default-500 text-sm pl-4 border-l-2 border-dashboard-bg h-full">
-              <p>Zeraki Analytics: {revenueByProduct["Zeraki Analytics"]}</p>
-              <p>Zeraki Finance: {revenueByProduct["Zeraki Finance"]}</p>
-              <p>Zeraki Timetable: {revenueByProduct["Zeraki Timetable"]}</p>
-            </div>
-          </CardHeader>
-          <CardBody className="overflow-visible py-2"></CardBody>
-        </Card>
-        <Card className="py-4 bg-card-bg">
-          <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-            <h4 className="font-bold text-large">Bounced Cheques</h4>
-            <small className="text-default-500 text-lg">
-              Total: {totalBouncedCheques}
-            </small>
-          </CardHeader>
-          <CardBody className="overflow-visible py-2"></CardBody>
-        </Card>
-      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-3 w-full">
+        <div className="lg:col-span-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 w-full">
+            <Card className="py-4 bg-card-bg">
+              <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+                <h4 className="font-bold text-large">Collections</h4>
+                <small className="text-default-500 text-lg">
+                  Total: {totalCollection}
+                </small>
+              </CardHeader>
+              <CardBody className="overflow-visible py-2"></CardBody>
+            </Card>
+            <Card className="py-4 bg-card-bg h-full">
+              <CardHeader className="pb-0 pt-2 px-4 flex gap-4 items-start justify-center h-full">
+                <div>
+                  <h4 className="font-bold text-large">Sign-ups</h4>
+                  <small className="text-default-500 text-lg">
+                    Total: {totalSignups}
+                  </small>
+                </div>
+                <div className="text-default-500 text-sm pl-4 border-l-2 border-dashboard-bg h-full">
+                  <p>
+                    Zeraki Analytics: {signupsByProduct["Zeraki Analytics"]}
+                  </p>
+                  <p>Zeraki Finance: {signupsByProduct["Zeraki Finance"]}</p>
+                  <p>
+                    Zeraki Timetable: {signupsByProduct["Zeraki Timetable"]}
+                  </p>
+                </div>
+              </CardHeader>
+              <CardBody className="overflow-visible py-2"></CardBody>
+            </Card>
+            <Card className="py-4 bg-card-bg h-full">
+              <CardHeader className="pb-0 pt-2 px-4 flex gap-4 items-start justify-center h-full">
+                <div>
+                  <h4 className="font-bold text-large">Revenue</h4>
+                  <small className="text-default-500 text-lg">
+                    Total: {totalRevenue}
+                  </small>
+                </div>
+                <div className="text-default-500 text-sm pl-4 border-l-2 border-dashboard-bg h-full">
+                  <p>
+                    Zeraki Analytics: {revenueByProduct["Zeraki Analytics"]}
+                  </p>
+                  <p>Zeraki Finance: {revenueByProduct["Zeraki Finance"]}</p>
+                  <p>
+                    Zeraki Timetable: {revenueByProduct["Zeraki Timetable"]}
+                  </p>
+                </div>
+              </CardHeader>
+              <CardBody className="overflow-visible py-2"></CardBody>
+            </Card>
+            <Card className="py-4 bg-card-bg">
+              <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+                <h4 className="font-bold text-large">Bounced Cheques</h4>
+                <small className="text-default-500 text-lg">
+                  Total: {totalBouncedCheques}
+                </small>
+              </CardHeader>
+              <CardBody className="overflow-visible py-2"></CardBody>
+            </Card>
+          </div>
 
-      <div>
-        <Targets signup={signupsByProduct} />
+          <div>
+            <Targets signup={signupsByProduct} />
+          </div>
+        </div>
+        <div>
+          <SignupsBarGraph />
+        </div>
       </div>
     </div>
   );

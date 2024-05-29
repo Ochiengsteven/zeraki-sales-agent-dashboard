@@ -1,8 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  createAsyncThunk,
+  PayloadAction,
+  unwrapResult,
+} from "@reduxjs/toolkit";
 import axios from "axios";
 
-// Base URL for JSON server
 const BASE_URL = "http://localhost:5000";
 
 export const fetchCollections = createAsyncThunk(
@@ -43,7 +47,10 @@ export const fetchInvoices = createAsyncThunk("api/fetchInvoices", async () => {
 
 export const fetchCollectionsPerSchool = createAsyncThunk(
   "api/fetchCollectionsPerSchool",
-  async (schoolId: number) => {
+  async (schoolId: number = 0) => {
+    if (schoolId === 0) {
+      throw new Error("schoolId is required");
+    }
     const response = await axios.get(`${BASE_URL}/collectionsPerSchool`, {
       params: { schoolId },
     });
@@ -51,12 +58,36 @@ export const fetchCollectionsPerSchool = createAsyncThunk(
   }
 );
 
+interface Signup {
+  id: number;
+  product: SignupProduct;
+  schoolId: number;
+  date: string;
+}
+
+interface Revenue {
+  id: number;
+  product: RevenueProduct;
+  amount: number;
+}
+
+interface School {
+  id: number;
+  name: string;
+  type: "Primary" | "Secondary" | "IGCSE";
+  county: string;
+  registrationDate: string;
+  contact: string;
+  products: string[];
+  balance: number;
+}
+
 interface ApiState {
   collections: any[];
   signups: Signup[];
   revenue: Revenue[];
   bouncedCheques: any[];
-  schools: any[];
+  schools: School[];
   invoices: any[];
   collectionsPerSchool: { [key: number]: any };
   loading: "idle" | "loading";
@@ -103,6 +134,7 @@ const apiSlice = createSlice({
         (state, action: PayloadAction<Signup[]>) => {
           state.loading = "idle";
           state.signups = action.payload;
+          console.log("Fetched signups:", action.payload);
         }
       )
       .addCase(fetchSignups.rejected, (state, action) => {
@@ -142,9 +174,10 @@ const apiSlice = createSlice({
       })
       .addCase(
         fetchSchools.fulfilled,
-        (state, action: PayloadAction<any[]>) => {
+        (state, action: PayloadAction<School[]>) => {
           state.loading = "idle";
           state.schools = action.payload;
+          console.log("Fetched schools:", action.payload);
         }
       )
       .addCase(fetchSchools.rejected, (state, action) => {
@@ -168,13 +201,12 @@ const apiSlice = createSlice({
       .addCase(fetchCollectionsPerSchool.pending, (state) => {
         state.loading = "loading";
       })
-      .addCase(
-        fetchCollectionsPerSchool.fulfilled,
-        (state, action: PayloadAction<any>) => {
-          state.loading = "idle";
-          state.collectionsPerSchool = action.payload;
-        }
-      )
+      .addCase(fetchCollectionsPerSchool.fulfilled, (state, action) => {
+        state.loading = "idle";
+        const result = unwrapResult(action);
+        const schoolId = action.meta.arg;
+        state.collectionsPerSchool[schoolId] = result;
+      })
       .addCase(fetchCollectionsPerSchool.rejected, (state, action) => {
         state.loading = "idle";
         state.error =
@@ -202,10 +234,6 @@ interface SignupBreakdown {
 }
 
 type SignupProduct = keyof SignupBreakdown;
-
-interface Signup {
-  product: SignupProduct;
-}
 
 export const selectSignupsByProduct = (state: {
   api: { signups: Signup[] };
@@ -241,11 +269,6 @@ interface RevenueBreakdown {
 
 type RevenueProduct = keyof RevenueBreakdown;
 
-interface Revenue {
-  product: RevenueProduct;
-  amount: number;
-}
-
 export const selectRevenueByProduct = (state: {
   api: { revenue: Revenue[] };
 }): RevenueBreakdown => {
@@ -267,5 +290,27 @@ export const selectRevenueByProduct = (state: {
 // Total number of bounced cheques
 export const selectTotalBouncedCheques = (state: { api: ApiState }) =>
   state.api.bouncedCheques.length;
+
+export const selectProductsBySchoolType = (state: { api: ApiState }) => {
+  const { schools } = state.api;
+
+  const result: {
+    [key: string]: { Primary: number; Secondary: number; IGCSE: number };
+  } = {
+    "Zeraki Analytics": { Primary: 0, Secondary: 0, IGCSE: 0 },
+    "Zeraki Finance": { Primary: 0, Secondary: 0, IGCSE: 0 },
+    "Zeraki Timetable": { Primary: 0, Secondary: 0, IGCSE: 0 },
+  };
+
+  schools.forEach((school) => {
+    school.products.forEach((product) => {
+      if (product in result) {
+        result[product][school.type]++;
+      }
+    });
+  });
+
+  return result;
+};
 
 export default apiSlice.reducer;
