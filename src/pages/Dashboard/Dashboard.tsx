@@ -5,16 +5,21 @@ import {
   fetchSignups,
   fetchRevenue,
   fetchBouncedCheques,
+  fetchInvoices,
+  fetchSchools,
   selectTotalCollections,
   selectTotalSignups,
   selectTotalRevenue,
   selectTotalBouncedCheques,
   selectSignupsByProduct,
   selectRevenueByProduct,
+  selectInvoices,
+  selectSchools,
 } from "../../redux/api/apiSlice";
 import { Card, CardHeader, CardBody } from "@nextui-org/react";
 import Targets from "../../components/Chart/Targets";
 import SignupsBarGraph from "../../components/Chart/SignupsBarGraph";
+import InvoicesList from "../../components/Invoice/InvoicesList";
 
 const Dashboard = () => {
   const dispatch = useAppDispatch();
@@ -24,6 +29,8 @@ const Dashboard = () => {
   const totalBouncedCheques = useAppSelector(selectTotalBouncedCheques);
   const signupsByProduct = useAppSelector(selectSignupsByProduct);
   const revenueByProduct = useAppSelector(selectRevenueByProduct);
+  const invoices = useAppSelector(selectInvoices);
+  const schools = useAppSelector(selectSchools);
   const loading = useAppSelector((state) => state.api.loading);
   const error = useAppSelector((state) => state.api.error);
 
@@ -32,6 +39,8 @@ const Dashboard = () => {
     dispatch(fetchSignups());
     dispatch(fetchRevenue());
     dispatch(fetchBouncedCheques());
+    dispatch(fetchInvoices());
+    dispatch(fetchSchools());
   }, [dispatch]);
 
   if (loading === "loading") {
@@ -111,8 +120,11 @@ const Dashboard = () => {
             <Targets signup={signupsByProduct} />
           </div>
         </div>
-        <div>
-          <SignupsBarGraph />
+        <div className="flex flex-col items-center">
+          <div className="bg-white p-2 rounded-xl lg:ml-6 mt-4 lg:mt-0 w-full">
+            <SignupsBarGraph />
+          </div>
+          <InvoicesList invoices={invoices} schools={schools} />
         </div>
       </div>
     </div>

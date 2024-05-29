@@ -134,7 +134,6 @@ const apiSlice = createSlice({
         (state, action: PayloadAction<Signup[]>) => {
           state.loading = "idle";
           state.signups = action.payload;
-          console.log("Fetched signups:", action.payload);
         }
       )
       .addCase(fetchSignups.rejected, (state, action) => {
@@ -177,7 +176,6 @@ const apiSlice = createSlice({
         (state, action: PayloadAction<School[]>) => {
           state.loading = "idle";
           state.schools = action.payload;
-          console.log("Fetched schools:", action.payload);
         }
       )
       .addCase(fetchSchools.rejected, (state, action) => {
@@ -192,6 +190,7 @@ const apiSlice = createSlice({
         (state, action: PayloadAction<any[]>) => {
           state.loading = "idle";
           state.invoices = action.payload;
+          console.log("Fetched invoices:", action.payload);
         }
       )
       .addCase(fetchInvoices.rejected, (state, action) => {
@@ -312,5 +311,8 @@ export const selectProductsBySchoolType = (state: { api: ApiState }) => {
 
   return result;
 };
+
+export const selectInvoices = (state: { api: ApiState }) => state.api.invoices;
+export const selectSchools = (state: { api: ApiState }) => state.api.schools;
 
 export default apiSlice.reducer;
