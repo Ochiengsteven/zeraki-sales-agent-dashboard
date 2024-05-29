@@ -19,7 +19,7 @@ const Sidebar = () => {
 
   const handleMenuItemClick = (link: string) => {
     navigate(link);
-    setIsMenuOpen(false); // Close the menu after navigation
+    setIsMenuOpen(false);
   };
 
   return (

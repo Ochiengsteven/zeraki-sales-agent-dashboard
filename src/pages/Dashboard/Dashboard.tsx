@@ -16,7 +16,7 @@ import {
   selectInvoices,
   selectSchools,
 } from "../../redux/api/apiSlice";
-import { Card, CardHeader, CardBody } from "@nextui-org/react";
+import { Card, CardHeader, CardBody, Skeleton } from "@nextui-org/react";
 import Targets from "../../components/Chart/Targets";
 import SignupsBarGraph from "../../components/Chart/SignupsBarGraph";
 import InvoicesList from "../../components/Invoice/InvoicesList";
@@ -47,7 +47,24 @@ const Dashboard = () => {
   console.log("Invoices data: ", invoices);
 
   if (loading === "loading") {
-    return <div>Loading...</div>;
+    return (
+      <Card className="w-full h-[100vh] space-y-5 p-4" radius="lg">
+        <Skeleton className="rounded-lg">
+          <div className="h-24 rounded-lg bg-default-300"></div>
+        </Skeleton>
+        <div className="space-y-3">
+          <Skeleton className="w-3/5 rounded-lg">
+            <div className="h-3 w-3/5 rounded-lg bg-default-200"></div>
+          </Skeleton>
+          <Skeleton className="w-4/5 rounded-lg">
+            <div className="h-3 w-4/5 rounded-lg bg-default-200"></div>
+          </Skeleton>
+          <Skeleton className="w-2/5 rounded-lg">
+            <div className="h-3 w-2/5 rounded-lg bg-default-300"></div>
+          </Skeleton>
+        </div>
+      </Card>
+    );
   }
 
   if (error) {

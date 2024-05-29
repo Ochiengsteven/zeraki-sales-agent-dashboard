@@ -69,7 +69,7 @@ Implemented a side navigation bar to enhance navigation and organization within 
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-- You can find the website [here](https://transcendent-biscochitos-37c1a7.netlify.app/)
+- You can find the website [here](https://zerakis.netlify.app/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -123,6 +123,8 @@ To run the project:
 ```sh
   npm run dev
 ```
+
+- _OPTIONAL_ open this server link `https://server-pl68.onrender.com/` to load the data faster by waking the render server.
 
 <!--
 Example command:
