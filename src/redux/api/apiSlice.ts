@@ -1,12 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// apiSlice.ts
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // Base URL for JSON server
 const BASE_URL = "http://localhost:5000";
 
-// Define async thunks for data fetching
 export const fetchCollections = createAsyncThunk(
   "api/fetchCollections",
   async () => {
@@ -53,7 +51,6 @@ export const fetchCollectionsPerSchool = createAsyncThunk(
   }
 );
 
-// Define types for the state
 interface ApiState {
   collections: any[];
   signups: Signup[];
@@ -186,7 +183,7 @@ const apiSlice = createSlice({
   },
 });
 
-// Selector to calculate total collections amount
+// Total collections amount
 export const selectTotalCollections = (state: { api: ApiState }) => {
   return state.api.collections.reduce(
     (total, collection) => total + collection.amount,
@@ -194,11 +191,10 @@ export const selectTotalCollections = (state: { api: ApiState }) => {
   );
 };
 
-// Selector to get the total number of signups
+// Total number of signups
 export const selectTotalSignups = (state: { api: ApiState }) =>
   state.api.signups.length;
 
-// Define types for breakdowns
 interface SignupBreakdown {
   "Zeraki Analytics": number;
   "Zeraki Finance": number;
@@ -229,7 +225,7 @@ export const selectSignupsByProduct = (state: {
   return breakdown;
 };
 
-// Selector to get the total revenue amount
+// Total revenue amount
 export const selectTotalRevenue = (state: { api: ApiState }) => {
   return state.api.revenue.reduce(
     (total, revenue) => total + revenue.amount,
@@ -237,7 +233,6 @@ export const selectTotalRevenue = (state: { api: ApiState }) => {
   );
 };
 
-// Define types for revenue breakdown
 interface RevenueBreakdown {
   "Zeraki Analytics": number;
   "Zeraki Finance": number;
@@ -269,7 +264,7 @@ export const selectRevenueByProduct = (state: {
   return breakdown;
 };
 
-// Selector to get the total number of bounced cheques
+// Total number of bounced cheques
 export const selectTotalBouncedCheques = (state: { api: ApiState }) =>
   state.api.bouncedCheques.length;
 
