@@ -158,14 +158,6 @@
       "paidAmount": 0,
       "status": "Pending",
       "daysUntilDue": 2
-    },
-    {
-      "id": "712d",
-      "item": "test",
-      "amount": "120.00",
-      "dueDate": "2024-05-30",
-      "status": "Pending",
-      "schoolId": "1"
     }
   ],
   "collectionsPerSchool": [

@@ -156,7 +156,11 @@ const SchoolDetails: React.FC<SchoolDetailsProps> = ({ school }) => {
         </p>
       </div>
 
-      <h3 className="text-lg text-gray-800 font-semibold mt-4">Invoices</h3>
+      <hr className="my-4" />
+
+      <h3 className="text-lg text-gray-800 text-center font-semibold mt-4">
+        Invoices
+      </h3>
       <InvoiceTable
         invoices={invoices}
         onEdit={handleEditInvoice}

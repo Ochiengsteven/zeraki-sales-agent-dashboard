@@ -26,7 +26,7 @@ const InvoiceTable: React.FC<InvoiceTableProps> = ({
     <div className="overflow-x-auto">
       <table className="min-w-full bg-white rounded-lg shadow-md overflow-x-auto">
         <thead>
-          <tr>
+          <tr className="bg-gray-200">
             <th className="py-2 px-4 border-b">Invoice Number</th>
             <th className="py-2 px-4 border-b">Item</th>
             <th className="py-2 px-4 border-b">Amount</th>
