@@ -1,5 +1,4 @@
-// SchoolDetails.tsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import InvoiceTable from "./InvoiceList";
 import CollectionList from "./CollectionList";
 
@@ -35,19 +34,32 @@ interface Collection {
 
 interface SchoolDetailsProps {
   school: School | undefined;
-  invoices: Invoice[];
-  collections: Collection[];
 }
 
-const SchoolDetails: React.FC<SchoolDetailsProps> = ({
-  school,
-  invoices,
-  collections,
-}) => {
+const SchoolDetails: React.FC<SchoolDetailsProps> = ({ school }) => {
+  const [invoices, setInvoices] = useState<Invoice[]>([]);
+  const [collections, setCollections] = useState<Collection[]>([]);
   const [newInvoice, setNewInvoice] = useState<Partial<Invoice>>({});
   const [editingInvoice, setEditingInvoice] = useState<Invoice | null>(null);
 
-  if (!school) return null;
+  useEffect(() => {
+    if (school) {
+      fetchInvoices();
+      fetchCollections();
+    }
+  }, [school]);
+
+  const fetchInvoices = () => {
+    fetch(`http://localhost:5000/invoices?schoolId=${school?.id}`)
+      .then((response) => response.json())
+      .then((data) => setInvoices(data));
+  };
+
+  const fetchCollections = () => {
+    fetch(`http://localhost:5000/collections?schoolId=${school?.id}`)
+      .then((response) => response.json())
+      .then((data) => setCollections(data));
+  };
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -61,7 +73,6 @@ const SchoolDetails: React.FC<SchoolDetailsProps> = ({
 
   const handleSaveInvoice = () => {
     if (editingInvoice) {
-      // Update existing invoice logic
       fetch(`http://localhost:5000/invoices/${editingInvoice.id}`, {
         method: "PUT",
         headers: {
@@ -73,19 +84,20 @@ const SchoolDetails: React.FC<SchoolDetailsProps> = ({
         .then(() => {
           setEditingInvoice(null);
           setNewInvoice({});
+          fetchInvoices(); // Fetch the latest invoices
         });
     } else {
-      // Create new invoice logic
       fetch("http://localhost:5000/invoices", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ ...newInvoice, schoolId: school.id }),
+        body: JSON.stringify({ ...newInvoice, schoolId: school?.id }),
       })
         .then((response) => response.json())
         .then(() => {
           setNewInvoice({});
+          fetchInvoices(); // Fetch the latest invoices
         });
     }
   };
@@ -99,7 +111,7 @@ const SchoolDetails: React.FC<SchoolDetailsProps> = ({
     fetch(`http://localhost:5000/invoices/${invoiceId}`, {
       method: "DELETE",
     }).then(() => {
-      // Handle state update to remove the deleted invoice
+      fetchInvoices(); // Fetch the latest invoices
     });
   };
 
@@ -111,9 +123,11 @@ const SchoolDetails: React.FC<SchoolDetailsProps> = ({
       },
       body: JSON.stringify({ status }),
     }).then(() => {
-      // Handle state update to reflect the new status
+      fetchCollections(); // Fetch the latest collections
     });
   };
+
+  if (!school) return null;
 
   return (
     <div className="bg-white p-4 rounded-lg shadow-md">

@@ -162,9 +162,9 @@
     {
       "id": "712d",
       "item": "test",
-      "amount": "1",
+      "amount": "120.00",
       "dueDate": "2024-05-30",
-      "status": "Completed",
+      "status": "Pending",
       "schoolId": "1"
     }
   ],

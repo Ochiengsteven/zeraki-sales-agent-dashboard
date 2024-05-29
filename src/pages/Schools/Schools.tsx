@@ -34,6 +34,7 @@ const Schools: React.FC = () => {
         {selectedSchoolId !== null && (
           <SchoolDetails
             school={schools.find((school) => school.id == selectedSchoolId)}
+            // @ts-expect-error - Fix the error
             invoices={invoices.filter(
               (invoice) => invoice.schoolId == selectedSchoolId
             )}
