@@ -47,6 +47,20 @@
       "date": "2024-05-03"
     }
   ],
+  "signuptargets": [
+    {
+      "product": "Zeraki Analytics",
+      "target": 10
+    },
+    {
+      "product": "Zeraki Finance",
+      "target": 5
+    },
+    {
+      "product": "Zeraki Timetable",
+      "target": 8
+    }
+  ],
   "revenue": [
     { "id": 1, "product": "Zeraki Analytics", "amount": 2000 },
     { "id": 2, "product": "Zeraki Finance", "amount": 1500 },
@@ -136,10 +150,5 @@
       "status": "Bounced",
       "amount": 300
     }
-  ],
-  "targets": {
-    "Zeraki Analytics": 10,
-    "Zeraki Finance": 15,
-    "Zeraki Timetable": 12
-  }
+  ]
 }

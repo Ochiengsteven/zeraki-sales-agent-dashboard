@@ -21,6 +21,7 @@
     "react-dom": "^18.2.0",
     "react-redux": "^9.1.2",
     "recharts": "^2.12.7",
+    "reselect": "^5.1.0",
     "rsuite": "^5.62.1"
   },
   "devDependencies": {
