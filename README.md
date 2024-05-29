@@ -108,7 +108,7 @@ Install the prerequisites this project using:
 
 To run the project:
 
-### 1. Start the server
+<!-- ### 1. Start the server
 
 - To start the JSON Server after installing dependencies, run the following command:
 
@@ -116,9 +116,9 @@ To run the project:
   json-server --watch db.json -p 5000
 ```
 
-### 2. Start client
+### 2. Start client -->
 
-- To start app, run the following command:
+- Run the following command to start the app:
 
 ```sh
   npm run dev

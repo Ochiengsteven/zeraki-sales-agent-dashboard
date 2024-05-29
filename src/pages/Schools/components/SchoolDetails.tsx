@@ -49,14 +49,16 @@ const SchoolDetails: React.FC<SchoolDetailsProps> = ({ school }) => {
     }
   }, [school]);
 
+  const BASE_URL = "https://server-pl68.onrender.com";
+
   const fetchInvoices = () => {
-    fetch(`http://localhost:5000/invoices?schoolId=${school?.id}`)
+    fetch(`${BASE_URL}/invoices?schoolId=${school?.id}`)
       .then((response) => response.json())
       .then((data) => setInvoices(data));
   };
 
   const fetchCollections = () => {
-    fetch(`http://localhost:5000/collections?schoolId=${school?.id}`)
+    fetch(`${BASE_URL}/collections?schoolId=${school?.id}`)
       .then((response) => response.json())
       .then((data) => setCollections(data));
   };
@@ -73,7 +75,7 @@ const SchoolDetails: React.FC<SchoolDetailsProps> = ({ school }) => {
 
   const handleSaveInvoice = () => {
     if (editingInvoice) {
-      fetch(`http://localhost:5000/invoices/${editingInvoice.id}`, {
+      fetch(`${BASE_URL}/invoices/${editingInvoice.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -87,7 +89,7 @@ const SchoolDetails: React.FC<SchoolDetailsProps> = ({ school }) => {
           fetchInvoices(); // Fetch the latest invoices
         });
     } else {
-      fetch("http://localhost:5000/invoices", {
+      fetch(`${BASE_URL}/invoices`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -108,7 +110,7 @@ const SchoolDetails: React.FC<SchoolDetailsProps> = ({ school }) => {
   };
 
   const handleDeleteInvoice = (invoiceId: number) => {
-    fetch(`http://localhost:5000/invoices/${invoiceId}`, {
+    fetch(`${BASE_URL}/invoices/${invoiceId}`, {
       method: "DELETE",
     }).then(() => {
       fetchInvoices(); // Fetch the latest invoices
@@ -116,7 +118,7 @@ const SchoolDetails: React.FC<SchoolDetailsProps> = ({ school }) => {
   };
 
   const handleUpdateCollectionStatus = (id: number, status: string) => {
-    fetch(`http://localhost:5000/collections/${id}`, {
+    fetch(`${BASE_URL}/collections/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
