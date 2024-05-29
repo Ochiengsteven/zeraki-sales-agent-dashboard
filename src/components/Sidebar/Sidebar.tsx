@@ -1,22 +1,27 @@
 import React from "react";
 import {
   Navbar,
-  // NavbarBrand,
   NavbarMenuToggle,
   NavbarMenuItem,
   NavbarMenu,
   NavbarContent,
-  // NavbarItem,
-  Link,
 } from "@nextui-org/react";
 import Desktopnav from "./Desktopnav";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const navigate = useNavigate();
   const menuItems = [
     { name: "Dashboard", link: "/" },
     { name: "Schools", link: "/schools" },
   ];
+
+  const handleMenuItemClick = (link: string) => {
+    navigate(link);
+    setIsMenuOpen(false); // Close the menu after navigation
+  };
+
   return (
     <header className="bg-transparent text-stone-800">
       <Navbar
@@ -40,10 +45,11 @@ const Sidebar = () => {
 
         <NavbarMenu>
           {menuItems.map((item, index) => (
-            <NavbarMenuItem key={index}>
-              <Link className="w-full" href={item.link}>
-                {item.name}
-              </Link>
+            <NavbarMenuItem
+              key={index}
+              onClick={() => handleMenuItemClick(item.link)}
+            >
+              <div className="w-full cursor-pointer">{item.name}</div>
             </NavbarMenuItem>
           ))}
         </NavbarMenu>
