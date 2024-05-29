@@ -53,7 +53,9 @@ const InvoicesList: React.FC<InvoicesListProps> = ({ invoices, schools }) => {
 
   return (
     <div className="p-4 m-2 w-full overflow-x">
-      <h2 className="text-2xl font-semibold mb-4">Upcoming Invoices</h2>
+      <h2 className="text-2xl font-semibold mb-4 text-center text-gray-800">
+        Upcoming Invoices
+      </h2>
       <div className="overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">

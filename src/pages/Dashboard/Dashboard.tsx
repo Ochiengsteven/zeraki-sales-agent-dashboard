@@ -123,8 +123,8 @@ const Dashboard = () => {
             <Targets signup={signupsByProduct} />
           </div>
         </div>
-        <div className="flex flex-col items-center">
-          <div className="bg-white p-2 rounded-xl lg:ml-6 mt-4 lg:mt-0 w-full">
+        <div className="flex flex-col items-center bg-white rounded-md p-2 m-2 lg:ml-4">
+          <div className="bg-white p-2 rounded-xl mt-4 lg:mt-0 w-full">
             <SignupsBarGraph />
           </div>
           <InvoicesList invoices={invoices} schools={schools} />
