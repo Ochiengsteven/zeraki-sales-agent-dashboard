@@ -75,12 +75,21 @@ const Dashboard = () => {
     <div className="mt-4 px-4 py-2 w-full">
       <div className="grid grid-cols-1 lg:grid-cols-3 w-full">
         <div className="lg:col-span-2">
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3 w-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full">
             <Card className="py-4 bg-card-bg">
-              <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-                <h4 className="font-bold text-large">Collections</h4>
-                <small className="text-default-500 text-lg">
-                  Total: {totalCollection}
+              <CardHeader className="pb-0 pt-2 px-4 flex items-start">
+                <h4 className="font-bold text-large">Total Collections:</h4>
+                <small className="text-gray-900 text-lg pl-2">
+                  {totalCollection}
+                </small>
+              </CardHeader>
+              <CardBody className="overflow-visible py-2"></CardBody>
+            </Card>
+            <Card className="py-4 bg-card-bg">
+              <CardHeader className="pb-0 pt-2 px-4 flex">
+                <h4 className="font-bold text-large">TotalBounced Cheques: </h4>
+                <small className="text-gray-900 text-lg pl-2">
+                  {totalBouncedCheques}
                 </small>
               </CardHeader>
               <CardBody className="overflow-visible py-2"></CardBody>
@@ -90,16 +99,27 @@ const Dashboard = () => {
                 <div>
                   <h4 className="font-bold text-large">Sign-ups</h4>
                   <small className="text-default-500 text-lg">
-                    Total: {totalSignups}
+                    Total: <span className="text-gray-900">{totalSignups}</span>
                   </small>
                 </div>
                 <div className="text-default-500 text-sm pl-4 border-l-2 border-dashboard-bg h-full">
                   <p>
-                    Zeraki Analytics: {signupsByProduct["Zeraki Analytics"]}
+                    Zeraki Analytics:{" "}
+                    <span className="text-gray-900">
+                      {signupsByProduct["Zeraki Analytics"]}
+                    </span>
                   </p>
-                  <p>Zeraki Finance: {signupsByProduct["Zeraki Finance"]}</p>
                   <p>
-                    Zeraki Timetable: {signupsByProduct["Zeraki Timetable"]}
+                    Zeraki Finance:{" "}
+                    <span className="text-gray-900">
+                      {signupsByProduct["Zeraki Finance"]}
+                    </span>
+                  </p>
+                  <p>
+                    Zeraki Timetable:{" "}
+                    <span className="text-gray-900">
+                      {signupsByProduct["Zeraki Timetable"]}
+                    </span>
                   </p>
                 </div>
               </CardHeader>
@@ -110,27 +130,30 @@ const Dashboard = () => {
                 <div>
                   <h4 className="font-bold text-large">Revenue</h4>
                   <small className="text-default-500 text-lg">
-                    Total: {totalRevenue}
+                    Total:{" "}
+                    <span className="text-gray-900">${totalRevenue}</span>
                   </small>
                 </div>
                 <div className="text-default-500 text-sm pl-4 border-l-2 border-dashboard-bg h-full">
                   <p>
-                    Zeraki Analytics: {revenueByProduct["Zeraki Analytics"]}
+                    Zeraki Analytics:{" "}
+                    <span className="text-gray-900">
+                      ${revenueByProduct["Zeraki Analytics"]}
+                    </span>
                   </p>
-                  <p>Zeraki Finance: {revenueByProduct["Zeraki Finance"]}</p>
                   <p>
-                    Zeraki Timetable: {revenueByProduct["Zeraki Timetable"]}
+                    Zeraki Finance:{" "}
+                    <span className="text-gray-900">
+                      ${revenueByProduct["Zeraki Finance"]}
+                    </span>
+                  </p>
+                  <p>
+                    Zeraki Timetable:{" "}
+                    <span className="text-gray-900">
+                      ${revenueByProduct["Zeraki Timetable"]}
+                    </span>
                   </p>
                 </div>
-              </CardHeader>
-              <CardBody className="overflow-visible py-2"></CardBody>
-            </Card>
-            <Card className="py-4 bg-card-bg">
-              <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-                <h4 className="font-bold text-large">Bounced Cheques</h4>
-                <small className="text-default-500 text-lg">
-                  Total: {totalBouncedCheques}
-                </small>
               </CardHeader>
               <CardBody className="overflow-visible py-2"></CardBody>
             </Card>
